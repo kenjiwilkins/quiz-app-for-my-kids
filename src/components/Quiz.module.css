@@ -1,0 +1,129 @@
+.screen {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: var(--sp-4);
+  padding: max(var(--sp-4), env(safe-area-inset-top)) max(var(--sp-4), env(safe-area-inset-right))
+    max(var(--sp-5), env(safe-area-inset-bottom)) max(var(--sp-4), env(safe-area-inset-left));
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 0 4px 4px 0;
+}
+
+.progress {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border: var(--bw-1) solid var(--border);
+}
+
+.dotDone {
+  background: var(--fg);
+}
+
+.dotCurrent {
+  background: var(--accent);
+}
+
+.picture {
+  position: relative;
+  min-height: 0;
+  margin: 0 6px 6px 0;
+  padding: var(--sp-3);
+  border: var(--bw-2) solid var(--border);
+  border-radius: 0;
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-big);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+.picture img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  animation: fadeIn var(--dur-slow) var(--ease-stand);
+}
+
+/*
+  答えの欄は高さを固定する。答えを出しても画像の大きさが変わらないようにするため。
+  --area-h の中に収まるように、答えの文字サイズは高さと文字数の両方から決める。
+*/
+.answerArea {
+  --area-h: clamp(96px, 18dvh, 152px);
+  height: var(--area-h);
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.answer {
+  /* --len は Quiz.tsx から答えの文字数を渡す */
+  --len: 3;
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+  padding: var(--sp-1) var(--sp-5);
+  background: var(--bh-yellow);
+  color: var(--bh-ink);
+  border: var(--bw-2) solid var(--bh-ink);
+  /* 高さ: 枠と余白を引いた残り / 幅: 画面幅を文字数で割った大きさ のうち小さいほう */
+  font-size: min(calc((var(--area-h) - 22px) / 1.15), calc((100vw - 96px) / (var(--len) + 0.2)), 104px);
+  white-space: nowrap;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  animation: fadeIn var(--dur) var(--ease-stand);
+}
+
+.hint {
+  display: grid;
+  place-items: center;
+  width: clamp(80px, 14vh, 120px);
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  border: var(--bw-2) solid var(--border);
+  background: var(--shape-blue);
+  color: #ffffff;
+  font-size: clamp(48px, 9vh, 80px);
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.next {
+  padding: 0 6px 6px 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

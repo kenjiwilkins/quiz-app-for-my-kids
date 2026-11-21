@@ -1,0 +1,54 @@
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: max(var(--sp-4), env(safe-area-inset-top)) max(var(--sp-4), env(safe-area-inset-right))
+    max(var(--sp-5), env(safe-area-inset-bottom)) max(var(--sp-4), env(safe-area-inset-left));
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  padding: 0 4px 4px 0;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-6);
+  animation: fadeIn var(--dur-slow) var(--ease-stand);
+}
+
+.composition {
+  width: min(70vw, 280px);
+  height: auto;
+  border: var(--bw-2) solid var(--border);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(56px, 16vw, 112px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.actions {
+  display: grid;
+  gap: var(--sp-5);
+  padding: 0 6px 6px 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

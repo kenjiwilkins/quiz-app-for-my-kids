@@ -1,0 +1,125 @@
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: max(var(--sp-5), env(safe-area-inset-top)) max(var(--sp-4), env(safe-area-inset-right))
+    max(var(--sp-4), env(safe-area-inset-bottom)) max(var(--sp-4), env(safe-area-inset-left));
+  max-width: 1080px;
+  margin: 0 auto;
+  gap: var(--sp-6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  padding-bottom: var(--sp-4);
+  border-bottom: var(--bw-3) solid var(--border);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(40px, 10vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0 6px 6px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 40vw, 260px), 1fr));
+  gap: var(--sp-5);
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: var(--bw-2) solid var(--border);
+  border-radius: 0;
+  background: var(--bg-elev);
+  color: var(--fg);
+  cursor: pointer;
+  box-shadow: var(--shadow-big);
+  transition:
+    transform var(--dur) var(--ease-stand),
+    box-shadow var(--dur) var(--ease-stand);
+  touch-action: manipulation;
+  text-align: left;
+}
+
+.card:active {
+  transform: translate(6px, 6px);
+  box-shadow: none;
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-bottom: var(--bw-2) solid var(--border);
+  /* 白背景のイラストと余白がなじむよう、ダークモードでも白にする */
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* 画像全体が必ず見えるように、切り抜かず中央に収める */
+.thumb img {
+  width: 100%;
+  height: 100%;
+  padding: var(--sp-2);
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.label svg {
+  flex: none;
+  width: 0.8em;
+  height: 0.8em;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  font-size: clamp(20px, 5.5vw, 36px);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.empty {
+  border: var(--bw-2) solid var(--border);
+  padding: var(--sp-6);
+  font-size: 18px;
+  line-height: 1.7;
+  background: var(--bg-elev);
+}
+
+.empty code {
+  font-size: 0.95em;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: var(--sp-5);
+}
+
+.creditsLink {
+  background: none;
+  border: none;
+  padding: var(--sp-2);
+  font-size: 14px;
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
