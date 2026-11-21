@@ -1,5 +1,5 @@
 import rawCredits from '../assets/quiz/credits.json'
-import type { QuizItem } from './loadAssets'
+import type { ImageItem } from './loadAssets'
 
 export type Credit = {
   author: string
@@ -19,12 +19,12 @@ const credits = new Map<string, Credit>(
  * キーは「ファイル名」（例: りんご.webp）。同じファイル名が別ジャンルにある場合は
  * 「ジャンル/ファイル名」（例: くだもの/りんご.webp）でも書ける（こちらが優先）。
  */
-export function findCredit(item: QuizItem): Credit | undefined {
+export function findCredit(item: ImageItem): Credit | undefined {
   return credits.get(`${item.genre}/${item.fileName}`) ?? credits.get(item.fileName)
 }
 
 /** 開発時だけ、credits.json に載っていない画像をコンソールで知らせる */
-export function warnMissingCredits(items: readonly QuizItem[]): void {
+export function warnMissingCredits(items: readonly ImageItem[]): void {
   if (!import.meta.env.DEV) return
   const missing = items.filter((item) => !findCredit(item))
   if (missing.length === 0) return

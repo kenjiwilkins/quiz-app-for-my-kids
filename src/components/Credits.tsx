@@ -1,5 +1,5 @@
 import { findCredit } from '../lib/credits'
-import type { Genre } from '../lib/loadAssets'
+import type { Genre, ImageItem } from '../lib/loadAssets'
 import { HomeButton } from './HomeButton'
 import styles from './Credits.module.css'
 
@@ -21,13 +21,18 @@ export function Credits({ genres, onBack }: Props) {
         このアプリで使用している画像の作者とライセンスです。各画像はそれぞれのライセンスに従って利用しています。
       </p>
 
-      {genres.map((genre) => (
+      {genres.map((genre) => {
+        // 色の問題は画像を使わないので載せない。default のカード画像は先頭に載せる
+        const images = genre.items.filter((item): item is ImageItem => item.kind === 'image')
+        const list = genre.cover && !images.includes(genre.cover) ? [genre.cover, ...images] : images
+        if (list.length === 0) return null
+        return (
         <section key={genre.name}>
           <h2 className={styles.genre}>{genre.name}</h2>
           <ul className={styles.list}>
-            {(genre.items.includes(genre.cover) ? genre.items : [genre.cover, ...genre.items]).map((item) => {
+            {list.map((item) => {
               const credit = findCredit(item)
-              const isCover = item === genre.cover && !genre.items.includes(item)
+              const isCover = item === genre.cover && !images.includes(item)
               return (
                 <li key={item.src} className={styles.item}>
                   <img src={item.src} alt="" loading="lazy" />
@@ -59,7 +64,8 @@ export function Credits({ genres, onBack }: Props) {
             })}
           </ul>
         </section>
-      ))}
+        )
+      })}
     </main>
   )
 }

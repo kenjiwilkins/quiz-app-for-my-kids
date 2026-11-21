@@ -1,9 +1,11 @@
 import { useEffect, useState, type CSSProperties } from 'react'
+import { shapeAt } from '../lib/colors'
 import type { Genre } from '../lib/loadAssets'
 import { preloadImage } from '../lib/preload'
 import { shuffle } from '../lib/shuffle'
 import { speak, stopSpeaking } from '../lib/speak'
 import { Button } from './Button'
+import { ColorShape } from './ColorShape'
 import { HomeButton } from './HomeButton'
 import styles from './Quiz.module.css'
 import { Result } from './Result'
@@ -27,7 +29,8 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
 
   // 次の画像を先読みしておく
   useEffect(() => {
-    preloadImage(deck[index + 1]?.src)
+    const nextItem = deck[index + 1]
+    if (nextItem?.kind === 'image') preloadImage(nextItem.src)
   }, [deck, index])
 
   // 画面を離れたら読み上げを止める
@@ -55,7 +58,7 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
         <ol className={styles.progress} aria-label={`${deck.length}もん ちゅう ${index + 1}もんめ`}>
           {deck.map((item, i) => (
             <li
-              key={item.src}
+              key={item.id}
               className={[styles.dot, i < index ? styles.dotDone : '', i === index ? styles.dotCurrent : ''].join(' ')}
             />
           ))}
@@ -64,13 +67,24 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
 
       <button
         type="button"
-        className={styles.picture}
+        className={[styles.picture, current.kind === 'color' ? styles.pictureColor : ''].join(' ')}
         // 色ブロックは問題ごとに 右下 / 左下 と向きを入れ替える
         style={{ '--block': color, '--dir': index % 2 === 0 ? 1 : -1 } as CSSProperties}
         onClick={reveal}
         aria-label={revealed ? `こたえは ${current.answer}。もういちど きく` : 'こたえを みる'}
       >
-        <img key={current.src} src={current.src} alt="" draggable={false} />
+        {current.kind === 'image' ? (
+          <img key={current.id} src={current.src} alt="" draggable={false} />
+        ) : (
+          // 色の問題: 画像の代わりに、その色で塗った図形を出す（形は問題ごとに 四角→円→三角）
+          <ColorShape
+            key={current.id}
+            hex={current.hex}
+            shape={shapeAt(index)}
+            stroke="var(--bh-ink)"
+            className={styles.swatch}
+          />
+        )}
       </button>
 
       <div className={styles.answerArea} aria-live="polite">

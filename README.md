@@ -66,6 +66,30 @@ src/assets/quiz/くだもの/りんご.webp   → 答えは「りんご」
 
 いま入っている画像（`くだもの/` と `どうぶつ/` の `.png`）は動作確認用のダミーです。本物の画像に差し替えて、ダミーは削除してください。
 
+## 色のクイズ（画像なし）
+
+色の問題は画像を置かずに、ジャンルのフォルダに `colors.json` を置いて Hex で書きます。
+
+```
+src/assets/quiz/いろ/colors.json
+```
+
+```json
+{
+  "あか": "#E53935",
+  "あお": "#1E63D6",
+  "しろ": "#FFFFFF"
+}
+```
+
+- **キーがそのまま答え**になり、表示と読み上げに使われます（ひらがなで書いてください）
+- 色は `#RRGGBB`（または `#RGB`）で書きます。書き間違いがあると、開発サーバーのブラウザのコンソールに警告が出て、その色は出題されません
+- クイズ画面では、その色で塗った図形（四角→丸→三角）が出ます
+- ジャンル選択のカードは、`default` の画像がなければ先頭の4色の図形で自動的に描かれます
+- 同じフォルダに画像と `colors.json` を一緒に置くこともできます
+- 色の問題はクレジット一覧には載りません。`images:check` / `images:optimize` の対象にもなりません
+- 3歳の子が迷いやすい組み合わせ（オレンジとちゃいろ、むらさきとあお など）は、慣れてから足すのがおすすめです
+
 ## クレジットの書き方
 
 Wikipedia / Wikimedia Commons の画像には、ライセンス（CC BY-SA など）にもとづく表示義務があります。
@@ -109,14 +133,16 @@ src/
 │   ├─ Quiz.tsx            クイズ画面
 │   ├─ Result.tsx          おしまい画面
 │   ├─ Credits.tsx         画像クレジット一覧（保護者向け）
+│   ├─ ColorShape.tsx      色の問題の図形とカード
 │   ├─ Button.tsx / HomeButton.tsx / Shapes.tsx
 ├─ lib/
-│   ├─ loadAssets.ts       画像の自動収集
+│   ├─ loadAssets.ts       画像と colors.json の自動収集
+│   ├─ colors.ts           ジャンルの色と図形の順番
 │   ├─ shuffle.ts          Fisher-Yates シャッフル（純粋関数）
 │   ├─ credits.ts          クレジットの照合と開発時の警告
 │   ├─ speak.ts            読み上げ（Web Speech API、非対応なら何もしない）
 │   └─ preload.ts          次の画像の先読み
 ├─ styles/global.css       デザイントークンと共通スタイル
-└─ assets/quiz/            クイズ画像と credits.json
+└─ assets/quiz/            クイズ画像・colors.json と credits.json
 public/                    PWA アイコン
 ```

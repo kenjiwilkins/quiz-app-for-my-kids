@@ -1,5 +1,5 @@
 // バウハウス風の幾何学アイコン。文字が読めなくても形で伝わるようにする。
-import { shapeColor } from '../lib/colors'
+import { shapeAt, shapeColor } from '../lib/colors'
 
 type IconProps = { size?: number }
 
@@ -44,11 +44,9 @@ export function LogoMark({ size = 40 }: IconProps) {
   )
 }
 
-const SHAPES = ['square', 'circle', 'triangle'] as const
-
 /** n 番目の図形（四角→円→三角 を くりかえす） */
 export function ShapeMark({ index, size = 28 }: { index: number; size?: number }) {
-  const shape = SHAPES[index % SHAPES.length]
+  const shape = shapeAt(index)
   const color = shapeColor(index)
   return (
     <svg width={size} height={size} viewBox="0 0 28 28" aria-hidden="true">

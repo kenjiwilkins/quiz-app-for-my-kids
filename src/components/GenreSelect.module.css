@@ -68,8 +68,9 @@
   overflow: hidden;
 }
 
-/* 画像全体が必ず見えるように、切り抜かず中央に収める */
-.thumb img {
+/* 画像全体が必ず見えるように、切り抜かず中央に収める（色だけのジャンルは図形の svg） */
+.thumb img,
+.thumb svg {
   width: 100%;
   height: 100%;
   padding: var(--sp-2);

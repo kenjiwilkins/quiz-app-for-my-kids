@@ -1,4 +1,5 @@
 import type { Genre } from '../lib/loadAssets'
+import { ColorCover } from './ColorShape'
 import styles from './GenreSelect.module.css'
 import { LogoMark, ShapeMark } from './Shapes'
 
@@ -26,7 +27,13 @@ export function GenreSelect({ genres, onSelect, onShowCredits }: Props) {
             <li key={genre.name}>
               <button type="button" className={styles.card} onClick={() => onSelect(genre)}>
                 <span className={styles.thumb}>
-                  <img src={genre.cover.src} alt="" />
+                  {genre.cover ? (
+                    <img src={genre.cover.src} alt="" />
+                  ) : (
+                    <ColorCover
+                      hexes={genre.items.flatMap((item) => (item.kind === 'color' ? [item.hex] : []))}
+                    />
+                  )}
                 </span>
                 <span className={styles.label}>
                   <ShapeMark index={i} />

@@ -1,67 +1,124 @@
-export type QuizItem = {
+type ItemBase = {
   /** ジャンル名（フォルダ名） */
   genre: string
-  /** 答えの表示名（拡張子を除いたファイル名） */
+  /** 答えの表示名（画像は拡張子を除いたファイル名、色は colors.json のキー） */
   answer: string
+  /** 問題ごとに一意なキー（React の key などに使う） */
+  id: string
+}
+
+/** 画像の問題 */
+export type ImageItem = ItemBase & {
+  kind: 'image'
   /** ビルド後の画像URL */
   src: string
   /** 拡張子つきのファイル名（クレジットの照合に使う） */
   fileName: string
 }
 
+/** 色の問題（colors.json に Hex で書く。画像はいらない） */
+export type ColorItem = ItemBase & {
+  kind: 'color'
+  /** 塗る色（#RGB または #RRGGBB） */
+  hex: string
+}
+
+export type QuizItem = ImageItem | ColorItem
+
 // フォルダとファイルを置くだけで反映される。コードの変更は不要。
-const modules = import.meta.glob<string>('/src/assets/quiz/*/*.{png,jpg,jpeg,webp}', {
+const imageModules = import.meta.glob<string>('/src/assets/quiz/*/*.{png,jpg,jpeg,webp}', {
   eager: true,
   query: '?url',
   import: 'default',
 })
 
+// 色の問題: ジャンルフォルダの colors.json に { "答え": "#RRGGBB" } で書く
+const colorModules = import.meta.glob<Record<string, unknown>>('/src/assets/quiz/*/colors.json', {
+  eager: true,
+  import: 'default',
+})
+
 const collator = new Intl.Collator('ja')
 
-function parse(path: string, src: string): QuizItem | null {
+/** パスから ジャンル名 と ファイル名 を取り出す */
+function splitPath(path: string): { genre: string; fileName: string } | null {
   // macOS で作ったファイル名は濁点が分解（NFD）されていることがあるので NFC にそろえる
   const parts = path.normalize('NFC').split('/')
   const fileName = parts.at(-1)
   const genre = parts.at(-2)
-  if (!fileName || !genre) return null
-  const answer = fileName.replace(/\.[^.]+$/, '')
-  return { genre, answer, src, fileName }
+  return fileName && genre ? { genre, fileName } : null
+}
+
+function parseImage(path: string, src: string): ImageItem | null {
+  const parsed = splitPath(path)
+  if (!parsed) return null
+  const answer = parsed.fileName.replace(/\.[^.]+$/, '')
+  return { kind: 'image', genre: parsed.genre, answer, id: src, src, fileName: parsed.fileName }
+}
+
+const HEX = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i
+
+function parseColors(path: string, colors: Record<string, unknown>): ColorItem[] {
+  const genre = splitPath(path)?.genre
+  if (!genre) return []
+  const items: ColorItem[] = []
+  for (const [key, value] of Object.entries(colors)) {
+    const answer = key.normalize('NFC')
+    if (typeof value !== 'string' || !HEX.test(value)) {
+      if (import.meta.env.DEV) {
+        console.warn(`[colors] ${genre}/colors.json の「${answer}」の色が正しくありません: ${String(value)}（#RRGGBB で書いてください）`)
+      }
+      continue
+    }
+    items.push({ kind: 'color', genre, answer, id: `color:${genre}/${answer}`, hex: value })
+  }
+  return items
 }
 
 /** ジャンルのカード用画像のファイル名（拡張子を除く）。出題はされない */
 const COVER_NAME = 'default'
 
-const isCover = (item: QuizItem) => item.answer.toLowerCase() === COVER_NAME
+const isCover = (item: QuizItem): item is ImageItem => item.kind === 'image' && item.answer.toLowerCase() === COVER_NAME
 
-const parsedItems: QuizItem[] = Object.entries(modules)
-  .map(([path, src]) => parse(path, src))
-  .filter((item): item is QuizItem => item !== null)
-  .sort((a, b) => collator.compare(a.genre, b.genre) || collator.compare(a.answer, b.answer))
+const byGenreAndAnswer = (a: QuizItem, b: QuizItem) =>
+  collator.compare(a.genre, b.genre) || collator.compare(a.answer, b.answer)
 
-const allItems = parsedItems.filter((item) => !isCover(item))
-const covers = new Map(parsedItems.filter(isCover).map((item) => [item.genre, item]))
+const imageItems: ImageItem[] = Object.entries(imageModules)
+  .map(([path, src]) => parseImage(path, src))
+  .filter((item): item is ImageItem => item !== null)
+  .sort(byGenreAndAnswer)
 
-/** 出題する画像（default を除く）を、ジャンル名・答えの順に並べて返す */
+const colorItems: ColorItem[] = Object.entries(colorModules)
+  .flatMap(([path, colors]) => parseColors(path, colors))
+  .sort(byGenreAndAnswer)
+
+const allItems: QuizItem[] = [...imageItems.filter((item) => !isCover(item)), ...colorItems].sort(byGenreAndAnswer)
+const covers = new Map(imageItems.filter(isCover).map((item) => [item.genre, item]))
+
+/** 出題する問題（default を除く）を、ジャンル名・答えの順に並べて返す */
 export function loadAssets(): QuizItem[] {
   return allItems
 }
 
-/** default も含めた、すべての画像を返す（クレジット用） */
-export function loadAllImages(): QuizItem[] {
-  return parsedItems
+/** default も含めた、すべての画像を返す（クレジット用。色の問題は含まない） */
+export function loadAllImages(): ImageItem[] {
+  return imageItems
 }
 
 export type Genre = {
   name: string
-  /** ジャンル選択のカードに出す画像。default があればそれ、なければ先頭の画像 */
-  cover: QuizItem
-  /** 出題する画像 */
+  /**
+   * ジャンル選択のカードに出す画像。default があればそれ、なければ先頭の画像。
+   * 画像が1枚もない（色だけの）ジャンルでは undefined で、カードには色の図形を描く
+   */
+  cover: ImageItem | undefined
+  /** 出題する問題 */
   items: QuizItem[]
 }
 
 /**
  * ジャンルごとにまとめて返す（ジャンルの並びはあいうえお順）。
- * 出題する画像が1枚もないジャンル（default だけのフォルダなど）は含めない。
+ * 出題する問題が1つもないジャンル（default だけのフォルダなど）は含めない。
  */
 export function loadGenres(): Genre[] {
   const map = new Map<string, QuizItem[]>()
@@ -70,5 +127,11 @@ export function loadGenres(): Genre[] {
     list.push(item)
     map.set(item.genre, list)
   }
-  return [...map.entries()].map(([name, items]) => ({ name, cover: covers.get(name) ?? items[0], items }))
+  return [...map.entries()]
+    .sort(([a], [b]) => collator.compare(a, b))
+    .map(([name, items]) => ({
+      name,
+      cover: covers.get(name) ?? items.find((item): item is ImageItem => item.kind === 'image'),
+      items,
+    }))
 }

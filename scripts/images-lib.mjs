@@ -14,14 +14,17 @@ export const MAX_BYTES = 400 * 1024
 /** 変換元として受け付ける拡張子 */
 export const SOURCE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.tif', '.tiff', '.heic', '.heif']
 
-/** ジャンルフォルダ内のファイルを { genre, file, abs } で列挙する（隠しファイルは除く） */
+/** 画像ではないデータファイル。images:check / images:optimize の対象外 */
+export const DATA_FILES = ['colors.json']
+
+/** ジャンルフォルダ内のファイルを { genre, file, abs } で列挙する（隠しファイルと DATA_FILES は除く） */
 export async function listQuizFiles() {
   const result = []
   for (const genre of await fs.readdir(QUIZ_DIR, { withFileTypes: true })) {
     if (!genre.isDirectory() || genre.name.startsWith('.')) continue
     const dir = path.join(QUIZ_DIR, genre.name)
     for (const file of await fs.readdir(dir)) {
-      if (file.startsWith('.')) continue
+      if (file.startsWith('.') || DATA_FILES.includes(file)) continue
       result.push({ genre: genre.name, file, abs: path.join(dir, file) })
     }
   }
