@@ -29,11 +29,17 @@ for (const { genre, file, abs } of await listQuizFiles()) {
     if (exists) throw new Error(`同じ名前の WebP がすでにあります: ${rel(out)}（どちらかを消してから再実行してください）`)
   }
 
-  const buffer = await sharp(abs)
-    .rotate() // 写真の向き（EXIF）を反映
-    .resize({ width: MAX_SIDE, height: MAX_SIDE, fit: 'inside', withoutEnlargement: true })
-    .webp({ quality: 80, alphaQuality: 100, effort: 6 })
-    .toBuffer({ resolveWithObject: true })
+  // MAX_BYTES に収まるまで画質を下げる（細かい模様の写真は quality 80 だと超えることがある）
+  const input = await fs.readFile(abs)
+  let buffer
+  for (const quality of [80, 72, 64, 56, 48]) {
+    buffer = await sharp(input)
+      .rotate() // 写真の向き（EXIF）を反映
+      .resize({ width: MAX_SIDE, height: MAX_SIDE, fit: 'inside', withoutEnlargement: true })
+      .webp({ quality, alphaQuality: 100, effort: 6 })
+      .toBuffer({ resolveWithObject: true })
+    if (buffer.data.length <= MAX_BYTES) break
+  }
   await fs.writeFile(out, buffer.data)
   if (out !== abs) await fs.unlink(abs)
 
