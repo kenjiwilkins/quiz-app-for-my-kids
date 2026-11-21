@@ -1,27 +1,587 @@
 {
-  "りんご.png": {
-    "author": "（ダミー画像）",
-    "license": "CC0",
-    "sourceUrl": ""
+  "くだもの/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
   },
-  "みかん.png": {
-    "author": "（ダミー画像）",
-    "license": "CC0",
-    "sourceUrl": ""
+  "くだもの/アボカド.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
   },
-  "ぶどう.png": {
-    "author": "（ダミー画像）",
-    "license": "CC0",
-    "sourceUrl": ""
+  "くだもの/いちご.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
   },
-  "いぬ.webp": {
-    "author": "（ダミー画像）",
-    "license": "CC0",
-    "sourceUrl": ""
+  "くだもの/かき.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
   },
-  "ねこ.webp": {
-    "author": "（ダミー画像）",
-    "license": "CC0",
-    "sourceUrl": ""
+  "くだもの/くり.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/さくらんぼ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/スイカ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/なし.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/パイナップル.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/バナナ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/ブドウ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/みかん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/メロン.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/もも.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "くだもの/りんご.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/100系.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/200系.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/300系.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/400系つばさ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/500系こだま.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/700系のぞみ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/800系つばめ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "しんかんせん/E1系Max.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/E3系こまち.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/E5系新幹線はやぶさ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/E8系つばさ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/East I.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/N700S.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/N700系新幹線のぞみ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/かもめ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/げんびしんかんせん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/こまち.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/ゼロ系.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/とき.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/ドクターイエロー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/とれいゆつばさ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/ハローキティ新幹線.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/ひかりレールスター.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/みずほ・さくら.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/やまびこ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "しんかんせん/北海道新幹線はやぶさ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "どうぶつ/いぬ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/うさぎ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/うし.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/うま.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/かば.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/かんがるー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/きつね.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/きりん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/くま.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/こあら.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ごりら.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/さい.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/しまうま.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ぞう.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ちーたー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/とら.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ねこ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ハムスター.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ぱんだ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ひつじ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/ぶた.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/もぐら.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/らいおん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/らくだ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "どうぶつ/りす.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "はたらくくるま/カーキャリア.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/クレーン車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ごみ収集車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ショベルカー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/タクシー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/タンクローリー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ダンプトラック.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/トラック.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/はしご車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/パトカー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ブルドーザー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ホイールローダー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ポンプ車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ミキサー車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/モーターグレーダー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/レスキュー車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/レッカー車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/ロードローラー.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/救急車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/宅配トラック.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/郵便車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/路線バス.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "はたらくくるま/路面清掃車.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "パン/あんぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/かれーぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/くりーむぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/くろわっさん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/しなもんろーる.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/じゃむぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/しょくぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/ちょこころね.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/なん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/ぱんとかんぱーにゅ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/ふらんすぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/ぷれっつぇる.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/べーぐる.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/めろんぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "パン/ろーるぱん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "やさい/かぼちゃ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/キャベツ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/きゅうり.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/とうもろこし.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/トマト.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/なす.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/パプリカ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "やさい/ピーマン.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
   }
 }
