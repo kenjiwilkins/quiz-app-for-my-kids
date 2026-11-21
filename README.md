@@ -26,6 +26,10 @@ pnpm dev
 | `pnpm preview` | ビルド結果をローカルで確認（PWA の動作確認はこちらで） |
 | `pnpm lint` | ESLint |
 | `pnpm typecheck` | TypeScript の型チェックのみ |
+| `pnpm images:check` | クイズ画像がすべて WebP・長辺 1200px 以内・400KB 以内か確認 |
+| `pnpm images:optimize` | クイズ画像を WebP（長辺 1200px 以内）に変換して置き換え。credits.json のキーも書き換える |
+
+画像は JPG / PNG のまま置いてかまいません。コミット前に `pnpm images:optimize` を実行してください（Claude Code でコミットするときは、`.claude/settings.json` のフックが自動でチェックし、WebP 化されていなければコミット・プッシュを止めます）。
 
 ## ジャンルの追加方法
 

@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { speak, stopSpeaking } from '../lib/speak'
 import { Button } from './Button'
 import { HomeButton } from './HomeButton'
 import styles from './Result.module.css'
@@ -9,6 +11,12 @@ type Props = {
 }
 
 export function Result({ onRetry, onHome }: Props) {
+  // おしまい画面が出たら読み上げる。画面を離れたら止める
+  useEffect(() => {
+    speak('おしまい')
+    return stopSpeaking
+  }, [])
+
   return (
     <main className={styles.screen}>
       <div className={styles.top}>
