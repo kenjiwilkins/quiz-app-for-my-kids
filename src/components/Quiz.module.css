@@ -81,6 +81,22 @@
   background: #ffffff;
 }
 
+/* 文字の問題は、枠の大きさ（cqw / cqh）に合わせて文字の大きさを決める */
+.pictureText {
+  container-type: size;
+}
+
+.moji {
+  /* --len は Quiz.tsx から文字数を渡す（にゅ なら 2） */
+  --len: 1;
+  font-size: min(72cqh, calc(80cqw / var(--len)));
+  font-weight: 900;
+  line-height: 1;
+  color: var(--fg);
+  white-space: nowrap;
+  animation: fadeIn var(--dur-slow) var(--ease-stand);
+}
+
 /* 色の問題の図形。正方形のまま、枠いっぱいに大きく出す */
 .swatch {
   width: 100%;

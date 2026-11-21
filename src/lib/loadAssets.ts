@@ -23,7 +23,12 @@ export type ColorItem = ItemBase & {
   hex: string
 }
 
-export type QuizItem = ImageItem | ColorItem
+/** 文字の問題（text.json に書く。画像はいらない）。answer の文字をそのまま大きく出す */
+export type TextItem = ItemBase & {
+  kind: 'text'
+}
+
+export type QuizItem = ImageItem | ColorItem | TextItem
 
 // フォルダとファイルを置くだけで反映される。コードの変更は不要。
 const imageModules = import.meta.glob<string>('/src/assets/quiz/*/*.{png,jpg,jpeg,webp}', {
@@ -34,6 +39,13 @@ const imageModules = import.meta.glob<string>('/src/assets/quiz/*/*.{png,jpg,jpe
 
 // 色の問題: ジャンルフォルダの colors.json に { "答え": "#RRGGBB" } で書く
 const colorModules = import.meta.glob<Record<string, unknown>>('/src/assets/quiz/*/colors.json', {
+  eager: true,
+  import: 'default',
+})
+
+// 文字の問題: ジャンルフォルダの text.json に { "pick": 20, "items": ["あ", "い", ...] } で書く
+type TextFile = { pick?: unknown; items?: unknown }
+const textModules = import.meta.glob<TextFile>('/src/assets/quiz/*/text.json', {
   eager: true,
   import: 'default',
 })
@@ -75,6 +87,36 @@ function parseColors(path: string, colors: Record<string, unknown>): ColorItem[]
   return items
 }
 
+/** 文字のジャンルの設定（1回に出す数と、カードに出す文字） */
+type TextGenre = { pick: number | undefined; coverText: string | undefined }
+const textGenres = new Map<string, TextGenre>()
+
+function parseText(path: string, file: TextFile): TextItem[] {
+  const genre = splitPath(path)?.genre
+  if (!genre) return []
+  const warn = (message: string) => {
+    if (import.meta.env.DEV) console.warn(`[text] ${genre}/text.json: ${message}`)
+  }
+  const raw = Array.isArray(file.items) ? file.items : []
+  if (raw.length === 0) warn('"items" に文字の配列を書いてください')
+  // 空文字と重複は除く
+  const answers = [
+    ...new Set(
+      raw
+        .filter((value): value is string => typeof value === 'string')
+        .map((value) => value.normalize('NFC').trim())
+        .filter(Boolean),
+    ),
+  ]
+  let pick: number | undefined
+  if (file.pick !== undefined) {
+    if (typeof file.pick === 'number' && Number.isInteger(file.pick) && file.pick > 0) pick = file.pick
+    else warn(`"pick" は 1 以上の整数で書いてください（${String(file.pick)}）。すべて出題します`)
+  }
+  textGenres.set(genre, { pick, coverText: answers[0] })
+  return answers.map((answer) => ({ kind: 'text', genre, answer, id: `text:${genre}/${answer}` }))
+}
+
 /** ジャンルのカード用画像のファイル名（拡張子を除く）。出題はされない */
 const COVER_NAME = 'default'
 
@@ -92,7 +134,13 @@ const colorItems: ColorItem[] = Object.entries(colorModules)
   .flatMap(([path, colors]) => parseColors(path, colors))
   .sort(byGenreAndAnswer)
 
-const allItems: QuizItem[] = [...imageItems.filter((item) => !isCover(item)), ...colorItems].sort(byGenreAndAnswer)
+const textItems: TextItem[] = Object.entries(textModules).flatMap(([path, file]) => parseText(path, file))
+
+// 文字の問題は text.json に書いた順のまま（あいうえお順のカード文字などに使う）。出題時はシャッフルされる
+const allItems: QuizItem[] = [
+  ...[...imageItems.filter((item) => !isCover(item)), ...colorItems].sort(byGenreAndAnswer),
+  ...textItems,
+]
 const covers = new Map(imageItems.filter(isCover).map((item) => [item.genre, item]))
 
 /** 出題する問題（default を除く）を、ジャンル名・答えの順に並べて返す */
@@ -109,9 +157,13 @@ export type Genre = {
   name: string
   /**
    * ジャンル選択のカードに出す画像。default があればそれ、なければ先頭の画像。
-   * 画像が1枚もない（色だけの）ジャンルでは undefined で、カードには色の図形を描く
+   * 画像が1枚もない（色・文字だけの）ジャンルでは undefined で、カードには色の図形か文字を描く
    */
   cover: ImageItem | undefined
+  /** 文字のジャンルのカードに出す文字（text.json の先頭） */
+  coverText: string | undefined
+  /** 1回のクイズで出す数。undefined ならすべて出す */
+  pick: number | undefined
   /** 出題する問題 */
   items: QuizItem[]
 }
@@ -132,6 +184,8 @@ export function loadGenres(): Genre[] {
     .map(([name, items]) => ({
       name,
       cover: covers.get(name) ?? items.find((item): item is ImageItem => item.kind === 'image'),
+      coverText: textGenres.get(name)?.coverText,
+      pick: textGenres.get(name)?.pick,
       items,
     }))
 }

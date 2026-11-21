@@ -79,6 +79,22 @@
   display: block;
 }
 
+.thumb:has(.textCover) {
+  container-type: size;
+}
+
+/* 文字のジャンルのカード。背景は常に白なので文字は黒に固定 */
+.textCover {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 70cqw;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--bh-ink);
+}
+
 .label svg {
   flex: none;
   width: 0.8em;

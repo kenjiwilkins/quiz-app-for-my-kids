@@ -90,6 +90,28 @@ src/assets/quiz/いろ/colors.json
 - 色の問題はクレジット一覧には載りません。`images:check` / `images:optimize` の対象にもなりません
 - 3歳の子が迷いやすい組み合わせ（オレンジとちゃいろ、むらさきとあお など）は、慣れてから足すのがおすすめです
 
+## 文字のクイズ（画像なし）
+
+ひらがな などの文字の問題も、画像を置かずにジャンルのフォルダに `text.json` を置いて書きます。
+
+```
+src/assets/quiz/ひらがな/text.json
+```
+
+```json
+{
+  "pick": 20,
+  "items": ["あ", "い", "う", "え", "お"]
+}
+```
+
+- `items` の文字が、そのまま問題と答えになります。クイズ画面に文字が大きく出て、答えを出すと読み上げます
+- `にゅ` `きゃ` のように2文字以上でもかまいません（枠に収まる大きさで表示されます）
+- `pick` は1回のクイズで出す数です。`items` からランダムに選ばれ、「もういっかい」のたびに選び直します。書かなければすべて出題します
+- ジャンル選択のカードには `items` の先頭の文字が出ます
+- いまは `ひらがな`（清音 46文字）と `ひらがな２`（濁音・半濁音と、きゃ などの拗音 58個）があり、どちらも 20個ずつ出題します
+- 文字の問題もクレジット一覧には載らず、`images:check` / `images:optimize` の対象にもなりません
+
 ## クレジットの書き方
 
 Wikipedia / Wikimedia Commons の画像には、ライセンス（CC BY-SA など）にもとづく表示義務があります。
@@ -136,13 +158,13 @@ src/
 │   ├─ ColorShape.tsx      色の問題の図形とカード
 │   ├─ Button.tsx / HomeButton.tsx / Shapes.tsx
 ├─ lib/
-│   ├─ loadAssets.ts       画像と colors.json の自動収集
+│   ├─ loadAssets.ts       画像・colors.json・text.json の自動収集
 │   ├─ colors.ts           ジャンルの色と図形の順番
 │   ├─ shuffle.ts          Fisher-Yates シャッフル（純粋関数）
 │   ├─ credits.ts          クレジットの照合と開発時の警告
 │   ├─ speak.ts            読み上げ（Web Speech API、非対応なら何もしない）
 │   └─ preload.ts          次の画像の先読み
 ├─ styles/global.css       デザイントークンと共通スタイル
-└─ assets/quiz/            クイズ画像・colors.json と credits.json
+└─ assets/quiz/            クイズ画像・colors.json・text.json と credits.json
 public/                    PWA アイコン
 ```

@@ -29,6 +29,9 @@ export function GenreSelect({ genres, onSelect, onShowCredits }: Props) {
                 <span className={styles.thumb}>
                   {genre.cover ? (
                     <img src={genre.cover.src} alt="" />
+                  ) : genre.coverText ? (
+                    // 文字のジャンル: 先頭の文字を大きく出す
+                    <span className={styles.textCover}>{genre.coverText}</span>
                   ) : (
                     <ColorCover
                       hexes={genre.items.flatMap((item) => (item.kind === 'color' ? [item.hex] : []))}

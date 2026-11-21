@@ -15,7 +15,7 @@ export const MAX_BYTES = 400 * 1024
 export const SOURCE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.tif', '.tiff', '.heic', '.heif']
 
 /** 画像ではないデータファイル。images:check / images:optimize の対象外 */
-export const DATA_FILES = ['colors.json']
+export const DATA_FILES = ['colors.json', 'text.json']
 
 /** ジャンルフォルダ内のファイルを { genre, file, abs } で列挙する（隠しファイルと DATA_FILES は除く） */
 export async function listQuizFiles() {

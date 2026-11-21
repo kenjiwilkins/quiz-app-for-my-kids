@@ -21,4 +21,5 @@
 - `default.webp` はジャンルのカード画像（出題されない）
 - ユーザーは JPG/PNG のまま画像を追加することがある。そのままコミットせず、必ず `pnpm images:optimize` で変換する
 - 色の問題は画像を置かず、ジャンルフォルダの `colors.json`（`{ "答え": "#RRGGBB" }`）に書く。`colors.json` は images:check / optimize の対象外
+- 文字の問題（ひらがな など）は `text.json`（`{ "pick": 20, "items": ["あ", ...] }`）に書く。pick は1回に出す数。これも images:check / optimize の対象外
 - `credits.json` のキーは拡張子つきのファイル名（`りんご.webp`）。`default` は `ジャンル/default.webp` で書く

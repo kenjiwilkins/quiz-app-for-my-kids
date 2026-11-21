@@ -20,8 +20,9 @@ type Props = {
 }
 
 export function Quiz({ genre, color, onHome, onRetry }: Props) {
-  // マウントのたびに1回だけシャッフルする（もういっかい は key を変えて作り直す）
-  const [deck] = useState(() => shuffle(genre.items))
+  // マウントのたびに1回だけシャッフルする（もういっかい は key を変えて作り直す）。
+  // pick があるジャンル（ひらがな など）は、シャッフルした先頭から pick 個だけ出す
+  const [deck] = useState(() => shuffle(genre.items).slice(0, genre.pick ?? genre.items.length))
   const [index, setIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
 
@@ -67,15 +68,18 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
 
       <button
         type="button"
-        className={[styles.picture, current.kind === 'color' ? styles.pictureColor : ''].join(' ')}
+        className={[
+          styles.picture,
+          current.kind === 'color' ? styles.pictureColor : '',
+          current.kind === 'text' ? styles.pictureText : '',
+        ].join(' ')}
         // 色ブロックは問題ごとに 右下 / 左下 と向きを入れ替える
         style={{ '--block': color, '--dir': index % 2 === 0 ? 1 : -1 } as CSSProperties}
         onClick={reveal}
         aria-label={revealed ? `こたえは ${current.answer}。もういちど きく` : 'こたえを みる'}
       >
-        {current.kind === 'image' ? (
-          <img key={current.id} src={current.src} alt="" draggable={false} />
-        ) : (
+        {current.kind === 'image' && <img key={current.id} src={current.src} alt="" draggable={false} />}
+        {current.kind === 'color' && (
           // 色の問題: 画像の代わりに、その色で塗った図形を出す（形は問題ごとに 四角→円→三角）
           <ColorShape
             key={current.id}
@@ -84,6 +88,16 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
             stroke="var(--bh-ink)"
             className={styles.swatch}
           />
+        )}
+        {current.kind === 'text' && (
+          // 文字の問題: 文字をそのまま大きく出す。読みは答えを出したときに読み上げる
+          <span
+            key={current.id}
+            className={styles.moji}
+            style={{ '--len': [...current.answer].length } as CSSProperties}
+          >
+            {current.answer}
+          </span>
         )}
       </button>
 
