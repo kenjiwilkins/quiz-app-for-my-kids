@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Credits } from './components/Credits'
 import { GenreSelect } from './components/GenreSelect'
 import { Quiz } from './components/Quiz'
+import { shapeColor } from './lib/colors'
 import { warnMissingCredits } from './lib/credits'
 import { loadAllImages, loadGenres, type Genre } from './lib/loadAssets'
 
@@ -29,6 +30,7 @@ export default function App() {
           // round を変えると Quiz が作り直され、再シャッフルされる
           key={`${screen.genre.name}-${screen.round}`}
           genre={screen.genre}
+          color={shapeColor(genres.indexOf(screen.genre))}
           onHome={goHome}
           onRetry={() => setScreen({ ...screen, round: screen.round + 1 })}
         />

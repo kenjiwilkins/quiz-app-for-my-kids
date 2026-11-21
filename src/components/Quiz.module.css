@@ -42,10 +42,15 @@
 }
 
 .picture {
+  /* 画像の後ろにずらして置く色ブロック。--block（色）と --dir（1 = 右下 / -1 = 左下）は Quiz.tsx から渡す */
+  --block: var(--shape-red);
+  --dir: 1;
+  --offset: clamp(8px, 2.4vmin, 16px);
   position: relative;
   min-height: 0;
   margin: 0 6px 6px 0;
-  padding: var(--sp-3);
+  /* 色ブロックがはみ出さないよう、ずらす分だけ余白をとる */
+  padding: calc(var(--sp-3) + var(--offset));
   border: var(--bw-2) solid var(--border);
   border-radius: 0;
   background: var(--bg-elev);
@@ -62,6 +67,9 @@
   max-height: 100%;
   object-fit: contain;
   display: block;
+  border: var(--bw-1) solid var(--border);
+  /* 色ブロック: 画像と同じ大きさの原色の四角を、斜めにずらして後ろに置く */
+  box-shadow: calc(var(--dir) * var(--offset)) var(--offset) 0 0 var(--block);
   animation: fadeIn var(--dur-slow) var(--ease-stand);
 }
 

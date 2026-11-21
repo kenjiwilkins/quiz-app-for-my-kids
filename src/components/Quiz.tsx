@@ -11,11 +11,13 @@ import { NextIcon } from './Shapes'
 
 type Props = {
   genre: Genre
+  /** 画像の後ろの色ブロックの色（ジャンルカードの図形と同じ色） */
+  color: string
   onHome: () => void
   onRetry: () => void
 }
 
-export function Quiz({ genre, onHome, onRetry }: Props) {
+export function Quiz({ genre, color, onHome, onRetry }: Props) {
   // マウントのたびに1回だけシャッフルする（もういっかい は key を変えて作り直す）
   const [deck] = useState(() => shuffle(genre.items))
   const [index, setIndex] = useState(0)
@@ -63,6 +65,8 @@ export function Quiz({ genre, onHome, onRetry }: Props) {
       <button
         type="button"
         className={styles.picture}
+        // 色ブロックは問題ごとに 右下 / 左下 と向きを入れ替える
+        style={{ '--block': color, '--dir': index % 2 === 0 ? 1 : -1 } as CSSProperties}
         onClick={reveal}
         aria-label={revealed ? `こたえは ${current.answer}。もういちど きく` : 'こたえを みる'}
       >
