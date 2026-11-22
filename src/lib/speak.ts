@@ -46,8 +46,18 @@ export function speak(text: string, { lang = 'ja-JP', audio }: SpeakOptions = {}
     return
   }
   // playClip の最初の await までは同期で動くので、タップの中で AudioContext を起こせる
-  playClip(audio, current).catch(() => {
+  playClip(audio, current).catch((error: unknown) => {
     if (current === generation) speakWithSynth(text, lang)
+    if (import.meta.env.DEV) {
+      // 開発中だけ、音声ファイルを鳴らせずに Web Speech API に切り替えた理由を出す
+      let name = audio
+      try {
+        name = decodeURI(audio)
+      } catch {
+        // そのまま出す
+      }
+      console.warn(`[speak] 音声ファイルを鳴らせないので Web Speech API で読み上げます: ${name}`, error)
+    }
   })
 }
 
