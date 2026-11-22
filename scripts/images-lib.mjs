@@ -17,8 +17,17 @@ export const SOURCE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '
 /** 画像ではないデータファイル。images:check / images:optimize の対象外 */
 export const DATA_FILES = ['colors.json', 'text.json']
 
-/** ジャンルフォルダ内のファイルを { genre, file, abs } で列挙する（隠しファイルと DATA_FILES は除く） */
+/** 音声ファイルの拡張子。images:check / images:optimize の対象外（audio:check / audio:optimize が扱う） */
+export const AUDIO_EXTS = ['.wav', '.aif', '.aiff', '.mp3', '.m4a', '.aac', '.caf', '.flac']
+
+/** ジャンルフォルダ内の画像ファイルを { genre, file, abs } で列挙する（隠しファイル・DATA_FILES・音声は除く） */
 export async function listQuizFiles() {
+  const all = await listGenreFiles()
+  return all.filter(({ file }) => !AUDIO_EXTS.includes(path.extname(file).toLowerCase()))
+}
+
+/** ジャンルフォルダ内のファイルを { genre, file, abs } で列挙する（隠しファイルと DATA_FILES は除く） */
+export async function listGenreFiles() {
   const result = []
   for (const genre of await fs.readdir(QUIZ_DIR, { withFileTypes: true })) {
     if (!genre.isDirectory() || genre.name.startsWith('.')) continue

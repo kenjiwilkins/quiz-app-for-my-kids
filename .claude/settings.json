@@ -6,9 +6,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); printf '%s' \"$cmd\" | grep -qE '(^|[;&|[:space:]])git([[:space:]]+-[^[:space:]]+([[:space:]]+[^-[:space:]][^[:space:]]*)?)*[[:space:]]+(commit|push)([[:space:]]|$)' || exit 0; cd \"$CLAUDE_PROJECT_DIR\" && node scripts/check-images.mjs 1>&2 || { echo 'コミット/プッシュ前の画像チェックに失敗しました。pnpm images:optimize で WebP に変換し、表示を確認してから再実行してください（CLAUDE.md 参照）。' 1>&2; exit 2; }",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); printf '%s' \"$cmd\" | grep -qE '(^|[;&|[:space:]])git([[:space:]]+-[^[:space:]]+([[:space:]]+[^-[:space:]][^[:space:]]*)?)*[[:space:]]+(commit|push)([[:space:]]|$)' || exit 0; cd \"$CLAUDE_PROJECT_DIR\" && { node scripts/check-images.mjs 1>&2 || { echo 'コミット/プッシュ前の画像チェックに失敗しました。pnpm images:optimize で WebP に変換し、表示を確認してから再実行してください（CLAUDE.md 参照）。' 1>&2; exit 2; }; } && { node scripts/check-audio.mjs 1>&2 || { echo 'コミット/プッシュ前の音声チェックに失敗しました。pnpm audio:optimize で .m4a に変換し、ファイル名が答えと一致しているか確認してから再実行してください（CLAUDE.md 参照）。' 1>&2; exit 2; }; }",
             "timeout": 120,
-            "statusMessage": "クイズ画像が WebP か確認中"
+            "statusMessage": "クイズ画像と読み上げ音声を確認中"
           }
         ]
       }

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { phraseAudio } from '../lib/loadAssets'
 import { speak, stopSpeaking } from '../lib/speak'
 import { Button } from './Button'
 import { HomeButton } from './HomeButton'
@@ -13,7 +14,7 @@ type Props = {
 export function Result({ onRetry, onHome }: Props) {
   // おしまい画面が出たら読み上げる。画面を離れたら止める
   useEffect(() => {
-    speak('おしまい')
+    speak('おしまい', { audio: phraseAudio('おしまい') })
     return stopSpeaking
   }, [])
 

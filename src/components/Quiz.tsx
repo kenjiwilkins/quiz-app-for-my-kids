@@ -3,7 +3,7 @@ import { shapeAt } from '../lib/colors'
 import { spokenLang, spokenText, type Genre } from '../lib/loadAssets'
 import { preloadImage } from '../lib/preload'
 import { shuffle } from '../lib/shuffle'
-import { speak, stopSpeaking } from '../lib/speak'
+import { preloadAudio, speak, stopSpeaking } from '../lib/speak'
 import { Button } from './Button'
 import { ColorShape } from './ColorShape'
 import { HomeButton } from './HomeButton'
@@ -28,10 +28,12 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
 
   const current = deck[index]
 
-  // 次の画像を先読みしておく
+  // いまの問題の音声と、次の画像・音声を先読みしておく
   useEffect(() => {
+    preloadAudio(deck[index]?.audio)
     const nextItem = deck[index + 1]
     if (nextItem?.kind === 'image') preloadImage(nextItem.src)
+    preloadAudio(nextItem?.audio)
   }, [deck, index])
 
   // 画面を離れたら読み上げを止める
@@ -41,9 +43,11 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
     return <Result onRetry={onRetry} onHome={onHome} />
   }
 
+  const say = () => speak(spokenText(current), { lang: spokenLang(current), audio: current.audio })
+
   const reveal = () => {
     setRevealed(true)
-    speak(spokenText(current), spokenLang(current))
+    say()
   }
 
   const next = () => {
@@ -107,7 +111,7 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
             type="button"
             className={styles.answer}
             style={{ '--len': [...current.answer].length } as CSSProperties}
-            onClick={() => speak(spokenText(current), spokenLang(current))}
+            onClick={say}
           >
             {current.answer}
           </button>

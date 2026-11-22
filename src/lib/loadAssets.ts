@@ -5,6 +5,8 @@ type ItemBase = {
   answer: string
   /** 問題ごとに一意なキー（React の key などに使う） */
   id: string
+  /** 読み上げ音声のURL（<ジャンル>/<答え>.m4a があるとき）。なければ Web Speech API で読み上げる */
+  audio?: string
 }
 
 /** 画像の問題 */
@@ -53,6 +55,20 @@ const colorModules = import.meta.glob<Record<string, unknown>>('/src/assets/quiz
 type TextFile = { pick?: unknown; lang?: unknown; items?: unknown }
 const textModules = import.meta.glob<TextFile>('/src/assets/quiz/*/text.json', {
   eager: true,
+  import: 'default',
+})
+
+// 読み上げ音声: ジャンルフォルダの <答え>.m4a（なければ Web Speech API で読み上げる）
+const audioModules = import.meta.glob<string>('/src/assets/quiz/*/*.m4a', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+
+// 問題以外で読む言葉（「おしまい」など）: src/assets/voice/<言葉>.m4a
+const voiceModules = import.meta.glob<string>('/src/assets/voice/*.m4a', {
+  eager: true,
+  query: '?url',
   import: 'default',
 })
 
@@ -143,6 +159,27 @@ function isEntry(value: unknown): value is { text: string; read?: unknown } {
   return typeof value === 'object' && value !== null && typeof (value as { text?: unknown }).text === 'string'
 }
 
+const audioKey = (genre: string, answer: string) => `${genre}/${answer}`
+
+/** <ジャンル>/<答え> -> 音声URL */
+const audioUrls = new Map<string, string>()
+for (const [path, url] of Object.entries(audioModules)) {
+  const parsed = splitPath(path)
+  if (parsed) audioUrls.set(audioKey(parsed.genre, parsed.fileName.replace(/\.[^.]+$/, '')), url)
+}
+
+/** <言葉> -> 音声URL */
+const voiceUrls = new Map<string, string>()
+for (const [path, url] of Object.entries(voiceModules)) {
+  const parsed = splitPath(path)
+  if (parsed) voiceUrls.set(parsed.fileName.replace(/\.[^.]+$/, ''), url)
+}
+
+/** 問題以外で読む言葉（「おしまい」など）の音声URL。src/assets/voice/<言葉>.m4a がなければ undefined */
+export function phraseAudio(text: string): string | undefined {
+  return voiceUrls.get(text)
+}
+
 /** 読み上げる言葉。文字の問題で読みが書いてあればそれ、なければ答えそのもの */
 export function spokenText(item: QuizItem): string {
   return (item.kind === 'text' && item.reading) || item.answer
@@ -176,7 +213,10 @@ const textItems: TextItem[] = Object.entries(textModules).flatMap(([path, file])
 const allItems: QuizItem[] = [
   ...[...imageItems.filter((item) => !isCover(item)), ...colorItems].sort(byGenreAndAnswer),
   ...textItems,
-]
+].map((item) => {
+  const audio = audioUrls.get(audioKey(item.genre, item.answer))
+  return audio ? { ...item, audio } : item
+})
 const covers = new Map(imageItems.filter(isCover).map((item) => [item.genre, item]))
 
 /** 出題する問題（default を除く）を、ジャンル名・答えの順に並べて返す */

@@ -28,6 +28,8 @@ pnpm dev
 | `pnpm typecheck` | TypeScript の型チェックのみ |
 | `pnpm images:check` | クイズ画像がすべて WebP・長辺 1200px 以内・400KB 以内か確認 |
 | `pnpm images:optimize` | クイズ画像を WebP（長辺 1200px 以内）に変換して置き換え。credits.json のキーも書き換える |
+| `pnpm audio:check` | 読み上げ音声がすべて `.m4a`・100KB 以内で、ファイル名が答えと一致しているか確認 |
+| `pnpm audio:optimize` | 読み上げ音声（WAV など）をモノラル・AAC 48kbps の `.m4a` に変換して置き換え（macOS の `afconvert` を使う） |
 
 画像は JPG / PNG のまま置いてかまいません。コミット前に `pnpm images:optimize` を実行してください（Claude Code でコミットするときは、`.claude/settings.json` のフックが自動でチェックし、WebP 化されていなければコミット・プッシュを止めます）。
 
@@ -114,6 +116,22 @@ src/assets/quiz/ひらがな/text.json
 - `"lang": "en-US"` を書くと、そのジャンルは英語の声で読み上げます（書かなければ日本語）
 - `えいご`（大文字 A〜Z）と `えいご２`（小文字 a〜z）は `pick` なしで 26文字すべてを出題し、英語で読み上げます。小文字は、英語の声だと `a` が単語の「ア」と読まれることがあるので、`read` に大文字を書いています
 - 文字の問題もクレジット一覧には載らず、`images:check` / `images:optimize` の対象にもなりません
+
+## 読み上げ音声（任意）
+
+答えの読み上げは、ふだんは端末の Web Speech API を使います。読みやイントネーションを正しくしたい問題だけ、自分で作った音声（VOICEVOX など）を置けます。**音声がある問題はその音声を鳴らし、ない問題は今までどおり Web Speech API で読み上げます。**
+
+```
+src/assets/quiz/しんかんせん/100系.wav   → 「100系」の問題で鳴らす
+src/assets/quiz/ひらがな/あ.wav          → text.json の「あ」で鳴らす（read ではなく文字そのものの名前）
+src/assets/quiz/いろ/あか.wav            → colors.json の「あか」で鳴らす
+src/assets/voice/おしまい.wav            → おしまい画面で鳴らす
+```
+
+- ファイル名（拡張子を除く）を、そのジャンルの答えと同じにしてください。一致しないと `audio:check` が失敗します
+- WAV のまま置いてかまいません。コミット前に `pnpm audio:optimize` で `.m4a` に変換されます（WAV は `.gitignore` 済み）。フックは未変換の音声があるとコミット・プッシュを止めます
+- 音声は `<audio>` ではなく Web Audio API で鳴らすので、スマホのロック画面や通知に「再生中」が出ず、ほかのアプリの音楽も止めません。iPhone のマナーモード中は鳴りません
+- VOICEVOX の声を使うときは、利用規約に従ってクレジット（例: `VOICEVOX:ずんだもん`）を表記してください
 
 ## クレジットの書き方
 

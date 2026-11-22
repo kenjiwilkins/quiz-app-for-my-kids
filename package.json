@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "images:check": "node scripts/check-images.mjs",
-    "images:optimize": "node scripts/optimize-images.mjs"
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "audio:check": "node scripts/check-audio.mjs",
+    "audio:optimize": "node scripts/optimize-audio.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",
