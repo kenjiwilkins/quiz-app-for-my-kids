@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { shapeAt } from '../lib/colors'
-import { spokenText, type Genre } from '../lib/loadAssets'
+import { spokenLang, spokenText, type Genre } from '../lib/loadAssets'
 import { preloadImage } from '../lib/preload'
 import { shuffle } from '../lib/shuffle'
 import { speak, stopSpeaking } from '../lib/speak'
@@ -43,7 +43,7 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
 
   const reveal = () => {
     setRevealed(true)
-    speak(spokenText(current))
+    speak(spokenText(current), spokenLang(current))
   }
 
   const next = () => {
@@ -107,7 +107,7 @@ export function Quiz({ genre, color, onHome, onRetry }: Props) {
             type="button"
             className={styles.answer}
             style={{ '--len': [...current.answer].length } as CSSProperties}
-            onClick={() => speak(spokenText(current))}
+            onClick={() => speak(spokenText(current), spokenLang(current))}
           >
             {current.answer}
           </button>

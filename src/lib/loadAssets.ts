@@ -28,6 +28,8 @@ export type TextItem = ItemBase & {
   kind: 'text'
   /** 読み上げる言葉（カタカナなど）。書かなければ answer をそのまま読む */
   reading: string | undefined
+  /** 読み上げの言語（例: en-US）。書かなければ日本語 */
+  lang: string | undefined
 }
 
 export type QuizItem = ImageItem | ColorItem | TextItem
@@ -46,8 +48,9 @@ const colorModules = import.meta.glob<Record<string, unknown>>('/src/assets/quiz
 })
 
 // 文字の問題: ジャンルフォルダの text.json に { "pick": 20, "items": ["あ", "い", ...] } で書く。
-// 読み方を決めたいときは items に { "text": "a", "read": "エー" } と書ける
-type TextFile = { pick?: unknown; items?: unknown }
+// 読み方を決めたいときは items に { "text": "a", "read": "エー" } と書ける。
+// "lang": "en-US" を書くと、そのジャンルはその言語の声で読み上げる
+type TextFile = { pick?: unknown; lang?: unknown; items?: unknown }
 const textModules = import.meta.glob<TextFile>('/src/assets/quiz/*/text.json', {
   eager: true,
   import: 'default',
@@ -120,12 +123,18 @@ function parseText(path: string, file: TextFile): TextItem[] {
     if (typeof file.pick === 'number' && Number.isInteger(file.pick) && file.pick > 0) pick = file.pick
     else warn(`"pick" は 1 以上の整数で書いてください（${String(file.pick)}）。すべて出題します`)
   }
+  let lang: string | undefined
+  if (file.lang !== undefined) {
+    if (typeof file.lang === 'string' && /^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$/.test(file.lang)) lang = file.lang
+    else warn(`"lang" は en-US のように書いてください（${String(file.lang)}）。日本語で読み上げます`)
+  }
   textGenres.set(genre, { pick, coverText: answers[0] })
   return answers.map((answer) => ({
     kind: 'text',
     genre,
     answer,
     reading: entries.get(answer),
+    lang,
     id: `text:${genre}/${answer}`,
   }))
 }
@@ -137,6 +146,11 @@ function isEntry(value: unknown): value is { text: string; read?: unknown } {
 /** 読み上げる言葉。文字の問題で読みが書いてあればそれ、なければ答えそのもの */
 export function spokenText(item: QuizItem): string {
   return (item.kind === 'text' && item.reading) || item.answer
+}
+
+/** 読み上げの言語。text.json に lang があればそれ（undefined なら日本語） */
+export function spokenLang(item: QuizItem): string | undefined {
+  return item.kind === 'text' ? item.lang : undefined
 }
 
 /** ジャンルのカード用画像のファイル名（拡張子を除く）。出題はされない */

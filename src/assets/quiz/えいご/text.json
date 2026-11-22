@@ -1,30 +1,11 @@
 {
+  "lang": "en-US",
   "items": [
-    { "text": "A", "read": "エー" },
-    { "text": "B", "read": "ビー" },
-    { "text": "C", "read": "シー" },
-    { "text": "D", "read": "ディー" },
-    { "text": "E", "read": "イー" },
-    { "text": "F", "read": "エフ" },
-    { "text": "G", "read": "ジー" },
-    { "text": "H", "read": "エイチ" },
-    { "text": "I", "read": "アイ" },
-    { "text": "J", "read": "ジェー" },
-    { "text": "K", "read": "ケー" },
-    { "text": "L", "read": "エル" },
-    { "text": "M", "read": "エム" },
-    { "text": "N", "read": "エヌ" },
-    { "text": "O", "read": "オー" },
-    { "text": "P", "read": "ピー" },
-    { "text": "Q", "read": "キュー" },
-    { "text": "R", "read": "アール" },
-    { "text": "S", "read": "エス" },
-    { "text": "T", "read": "ティー" },
-    { "text": "U", "read": "ユー" },
-    { "text": "V", "read": "ブイ" },
-    { "text": "W", "read": "ダブリュー" },
-    { "text": "X", "read": "エックス" },
-    { "text": "Y", "read": "ワイ" },
-    { "text": "Z", "read": "ゼット" }
+    "A", "B", "C", "D", "E",
+    "F", "G", "H", "I", "J",
+    "K", "L", "M", "N", "O",
+    "P", "Q", "R", "S", "T",
+    "U", "V", "W", "X", "Y",
+    "Z"
   ]
 }
