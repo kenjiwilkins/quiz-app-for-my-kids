@@ -26,6 +26,8 @@ export type ColorItem = ItemBase & {
 /** 文字の問題（text.json に書く。画像はいらない）。answer の文字をそのまま大きく出す */
 export type TextItem = ItemBase & {
   kind: 'text'
+  /** 読み上げる言葉（カタカナなど）。書かなければ answer をそのまま読む */
+  reading: string | undefined
 }
 
 export type QuizItem = ImageItem | ColorItem | TextItem
@@ -43,7 +45,8 @@ const colorModules = import.meta.glob<Record<string, unknown>>('/src/assets/quiz
   import: 'default',
 })
 
-// 文字の問題: ジャンルフォルダの text.json に { "pick": 20, "items": ["あ", "い", ...] } で書く
+// 文字の問題: ジャンルフォルダの text.json に { "pick": 20, "items": ["あ", "い", ...] } で書く。
+// 読み方を決めたいときは items に { "text": "a", "read": "エー" } と書ける
 type TextFile = { pick?: unknown; items?: unknown }
 const textModules = import.meta.glob<TextFile>('/src/assets/quiz/*/text.json', {
   eager: true,
@@ -99,22 +102,41 @@ function parseText(path: string, file: TextFile): TextItem[] {
   }
   const raw = Array.isArray(file.items) ? file.items : []
   if (raw.length === 0) warn('"items" に文字の配列を書いてください')
-  // 空文字と重複は除く
-  const answers = [
-    ...new Set(
-      raw
-        .filter((value): value is string => typeof value === 'string')
-        .map((value) => value.normalize('NFC').trim())
-        .filter(Boolean),
-    ),
-  ]
+  // 文字列か { text, read } を受け付ける。空文字と重複は除く
+  const entries = new Map<string, string | undefined>()
+  for (const value of raw) {
+    const text = typeof value === 'string' ? value : isEntry(value) ? value.text : undefined
+    const read = isEntry(value) && typeof value.read === 'string' ? value.read.trim() || undefined : undefined
+    const answer = text?.normalize('NFC').trim()
+    if (!answer) {
+      warn(`読めない項目があります: ${JSON.stringify(value)}`)
+      continue
+    }
+    if (!entries.has(answer)) entries.set(answer, read)
+  }
+  const answers = [...entries.keys()]
   let pick: number | undefined
   if (file.pick !== undefined) {
     if (typeof file.pick === 'number' && Number.isInteger(file.pick) && file.pick > 0) pick = file.pick
     else warn(`"pick" は 1 以上の整数で書いてください（${String(file.pick)}）。すべて出題します`)
   }
   textGenres.set(genre, { pick, coverText: answers[0] })
-  return answers.map((answer) => ({ kind: 'text', genre, answer, id: `text:${genre}/${answer}` }))
+  return answers.map((answer) => ({
+    kind: 'text',
+    genre,
+    answer,
+    reading: entries.get(answer),
+    id: `text:${genre}/${answer}`,
+  }))
+}
+
+function isEntry(value: unknown): value is { text: string; read?: unknown } {
+  return typeof value === 'object' && value !== null && typeof (value as { text?: unknown }).text === 'string'
+}
+
+/** 読み上げる言葉。文字の問題で読みが書いてあればそれ、なければ答えそのもの */
+export function spokenText(item: QuizItem): string {
+  return (item.kind === 'text' && item.reading) || item.answer
 }
 
 /** ジャンルのカード用画像のファイル名（拡張子を除く）。出題はされない */

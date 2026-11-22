@@ -1,0 +1,30 @@
+{
+  "items": [
+    { "text": "a", "read": "エー" },
+    { "text": "b", "read": "ビー" },
+    { "text": "c", "read": "シー" },
+    { "text": "d", "read": "ディー" },
+    { "text": "e", "read": "イー" },
+    { "text": "f", "read": "エフ" },
+    { "text": "g", "read": "ジー" },
+    { "text": "h", "read": "エイチ" },
+    { "text": "i", "read": "アイ" },
+    { "text": "j", "read": "ジェー" },
+    { "text": "k", "read": "ケー" },
+    { "text": "l", "read": "エル" },
+    { "text": "m", "read": "エム" },
+    { "text": "n", "read": "エヌ" },
+    { "text": "o", "read": "オー" },
+    { "text": "p", "read": "ピー" },
+    { "text": "q", "read": "キュー" },
+    { "text": "r", "read": "アール" },
+    { "text": "s", "read": "エス" },
+    { "text": "t", "read": "ティー" },
+    { "text": "u", "read": "ユー" },
+    { "text": "v", "read": "ブイ" },
+    { "text": "w", "read": "ダブリュー" },
+    { "text": "x", "read": "エックス" },
+    { "text": "y", "read": "ワイ" },
+    { "text": "z", "read": "ゼット" }
+  ]
+}
