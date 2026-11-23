@@ -15,7 +15,7 @@ export const MAX_BYTES = 400 * 1024
 export const SOURCE_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.tif', '.tiff', '.heic', '.heif']
 
 /** 画像ではないデータファイル。images:check / images:optimize の対象外 */
-export const DATA_FILES = ['colors.json', 'text.json']
+export const DATA_FILES = ['colors.json', 'text.json', 'voice.json']
 
 /** 音声ファイルの拡張子。images:check / images:optimize の対象外（audio:check / audio:optimize が扱う） */
 export const AUDIO_EXTS = ['.wav', '.aif', '.aiff', '.mp3', '.m4a', '.aac', '.caf', '.flac']

@@ -29,6 +29,7 @@ pnpm dev
 | `pnpm images:check` | クイズ画像がすべて WebP・長辺 1200px 以内・400KB 以内か確認 |
 | `pnpm images:optimize` | クイズ画像を WebP（長辺 1200px 以内）に変換して置き換え。credits.json のキーも書き換える |
 | `pnpm audio:check` | 読み上げ音声がすべて `.m4a`・100KB 以内で、ファイル名が答えと一致しているか確認 |
+| `pnpm voice:generate` | ローカルの VOICEVOX で、音声がまだない問題の読み上げ音声（.m4a）を作る（下の「読み上げ音声」を参照） |
 | `pnpm audio:optimize` | 読み上げ音声（WAV など）をモノラル・AAC 48kbps の `.m4a` に変換して置き換え（macOS の `afconvert` を使う） |
 
 画像は JPG / PNG のまま置いてかまいません。コミット前に `pnpm images:optimize` を実行してください（Claude Code でコミットするときは、`.claude/settings.json` のフックが自動でチェックし、WebP 化されていなければコミット・プッシュを止めます）。
@@ -131,6 +132,34 @@ src/assets/voice/おしまい.wav            → おしまい画面で鳴らす
 - ファイル名（拡張子を除く）を、そのジャンルの答えと同じにしてください。一致しないと `audio:check` が失敗します
 - WAV のまま置いてかまいません。コミット前に `pnpm audio:optimize` で `.m4a` に変換されます（WAV は `.gitignore` 済み）。フックは未変換の音声があるとコミット・プッシュを止めます
 - 音声は `<audio>` ではなく Web Audio API で鳴らすので、スマホのロック画面や通知に「再生中」が出ず、ほかのアプリの音楽も止めません。iPhone のマナーモード中は鳴りません
+### VOICEVOX でまとめて作る（`pnpm voice:generate`）
+
+VOICEVOX のデスクトップアプリを起動しておくと、裏で動くエンジン（`http://127.0.0.1:50021`）を使って、コマンドから音声を作れます。声は ずんだもん（ノーマル）、話し方はアプリの既定値と同じです（`scripts/generate-voice.mjs` の `CONFIG` で変えられます）。
+
+```bash
+pnpm voice:generate --dry-run              # 作らずに、読みとアクセントだけ確認する
+pnpm voice:generate                        # 音声がまだない問題をすべて作る
+pnpm voice:generate --genre でんしゃ         # ジャンルをしぼる
+pnpm voice:generate --only 常磐線 --force    # 決めた問題だけ作り直す
+```
+
+- すでに音声がある問題（アプリで手作りしたものを含む）は、`--force` を付けない限り上書きしません
+- 「す」などが息だけの音（無声化）にならないよう、はっきり発音させます
+- 英語のジャンル（`lang` があるもの）は作りません
+- 読みやアクセントがおかしいときは、ジャンルフォルダの `voice.json` に書いて作り直します
+
+```json
+{
+  "JR大和路線": "ジェイアールヤマトジセン",
+  "阪堺電車": "ハンカイデ'ンシャ"
+}
+```
+
+  - `'` を含まない値は、ふつうの文として読ませます（カタカナで読みを決める）
+  - `'` を含む値は、アクセントつきのカナ表記です。`'` の直前の音が高く、そこから下がります。`/` でアクセント句を区切り、長音は `ー` ではなく母音で書きます（例: `ジョオバンセン'`）。`--dry-run` に出るカナ表記を写して直すと楽です
+  - 「おしまい」は `src/assets/voice/voice.json` に書きます
+  - `voice.json` のキーが答えと一致しないと `audio:check` が失敗します
+
 - VOICEVOX の声を使うときは、利用規約に従ってクレジット（例: `VOICEVOX:ずんだもん`）を表記してください。クレジット画面の表記は `src/lib/credits.ts` の `voiceCredits` に書きます（別の声を使ったら追加する）
 
 ## クレジットの書き方

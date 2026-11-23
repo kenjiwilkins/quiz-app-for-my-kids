@@ -31,4 +31,5 @@
 
 - 置き場所: `src/assets/quiz/<ジャンル>/<答え>.m4a`。問題以外の言葉（おしまい）は `src/assets/voice/<言葉>.m4a`
 - ユーザーは WAV で置く。そのままコミットせず、必ず `pnpm audio:optimize` で変換する（`*.wav` は .gitignore 済み）
+- `pnpm voice:generate` でローカルの VOICEVOX（アプリ起動中のエンジン）から直接 .m4a を作れる。読み・アクセントの直しは `<ジャンル>/voice.json`（`{ "答え": "カタカナ" }` か `'` つきのカナ表記）。作ったら `--dry-run` の表示と耳で確かめてもらう
 - 音声がある問題は Web Audio API で鳴らし（Media Session を出さないため `<audio>` は使わない）、ない問題・鳴らせないときは Web Speech API で読む

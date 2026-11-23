@@ -1,14 +1,10 @@
 // 読み上げ音声（WAV など）を モノラル・AAC 48kbps の .m4a に変換し、元ファイルを消す。
 // macOS に最初から入っている afconvert を使う（ほかのソフトのインストールは不要）。
 // すでに .m4a のものには何もしない。
-import { execFile } from 'node:child_process'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { promisify } from 'node:util'
 import { rel } from './images-lib.mjs'
-import { AAC_BITRATE, OUTPUT_EXT, listAudioFiles } from './audio-lib.mjs'
-
-const run = promisify(execFile)
+import { OUTPUT_EXT, convertToM4a, listAudioFiles } from './audio-lib.mjs'
 
 if (process.platform !== 'darwin') {
   console.error('[audio:optimize] macOS の afconvert を使うため、Mac で実行してください')
@@ -25,8 +21,7 @@ for (const { file, abs } of await listAudioFiles()) {
   const exists = await fs.access(out).then(() => true, () => false)
   if (exists) throw new Error(`同じ名前の ${OUTPUT_EXT} がすでにあります: ${rel(out)}（どちらかを消してから再実行してください）`)
 
-  // -c 1: モノラル / -d aac: AAC-LC / -b: ビットレート / -f m4af: .m4a コンテナ
-  await run('afconvert', ['-f', 'm4af', '-d', 'aac', '-c', '1', '-b', String(AAC_BITRATE), abs, out])
+  await convertToM4a(abs, out)
   const { size: inSize } = await fs.stat(abs)
   const { size: outSize } = await fs.stat(out)
   await fs.unlink(abs)
