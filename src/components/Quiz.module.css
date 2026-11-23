@@ -113,6 +113,8 @@
   --area-h: clamp(96px, 18dvh, 152px);
   height: var(--area-h);
   min-width: 0;
+  /* 答えの文字幅を、画面幅ではなくこの欄の幅（cqw）から決めるため */
+  container-type: inline-size;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,8 +130,15 @@
   background: var(--bh-yellow);
   color: var(--bh-ink);
   border: var(--bw-2) solid var(--bh-ink);
-  /* 高さ: 枠と余白を引いた残り / 幅: 画面幅を文字数で割った大きさ のうち小さいほう */
-  font-size: min(calc((var(--area-h) - 22px) / 1.15), calc((100vw - 96px) / (var(--len) + 0.2)), 104px);
+  /*
+    高さ: 枠と余白を引いた残り / 幅: 答えの欄の幅から左右の余白・枠を引いて文字数で割った大きさ のうち小さいほう。
+    画面（.screen）は max-width で止まるので、100vw ではなく欄の幅（100cqw）を使う。
+  */
+  font-size: min(
+    calc((var(--area-h) - 22px) / 1.15),
+    calc((100cqw - 2 * var(--sp-5) - 2 * var(--bw-2) - 8px) / (var(--len) + 0.2)),
+    104px
+  );
   white-space: nowrap;
   font-weight: 900;
   line-height: 1.15;
