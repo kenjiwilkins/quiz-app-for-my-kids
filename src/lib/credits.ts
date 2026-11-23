@@ -33,3 +33,24 @@ export function warnMissingCredits(items: readonly ImageItem[]): void {
       missing.map((item) => `  - ${item.genre}/${item.fileName}`).join('\n'),
   )
 }
+
+export type VoiceCredit = {
+  /** 表示するクレジット（利用規約で決められた書き方） */
+  label: string
+  /** 使ったソフトのURL */
+  softwareUrl: string
+  /** キャラクターの利用規約のURL */
+  termsUrl: string
+}
+
+/**
+ * 読み上げ音声（src/assets/quiz/<ジャンル>/<答え>.m4a など）のクレジット。
+ * VOICEVOX のキャラクターは「VOICEVOX:キャラ名」の表記が必要。声を増やしたらここに足す
+ */
+export const voiceCredits: readonly VoiceCredit[] = [
+  {
+    label: 'VOICEVOX:ずんだもん',
+    softwareUrl: 'https://voicevox.hiroshiba.jp/',
+    termsUrl: 'https://zunko.jp/con_ongen_kiyaku.html',
+  },
+]
