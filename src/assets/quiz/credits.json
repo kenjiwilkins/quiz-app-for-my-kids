@@ -1,4 +1,79 @@
 {
+  "キッチン/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/あわだてき.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/おたま.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/ざる.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/すいはんき.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/でんしレンジ.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/なべ.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/ほうちょう.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/れいぞうこ.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/エプロン.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/トースター.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/フライがえし.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/フライパン.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/ボウル.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "キッチン/ミキサー.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
   "くだもの/default.webp": {
     "author": "いらすとや",
     "license": "いらすとや 利用規約",
@@ -865,6 +940,71 @@
     "sourceUrl": "https://ja.wikipedia.org/"
   },
   "やさい/レンコン.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/default.webp": {
+    "author": "いらすとや",
+    "license": "いらすとや 利用規約",
+    "sourceUrl": "https://www.irasutoya.com/"
+  },
+  "りょうり/おにぎり.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/からあげ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/ごはん.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/みそしる.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/めだまやき.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/エビフライ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/オムライス.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/カレーライス.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/コロッケ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/サラダ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/ソーセージ.webp": {
+    "author": "Wikipedia",
+    "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
+    "sourceUrl": "https://ja.wikipedia.org/"
+  },
+  "りょうり/ハンバーグ.webp": {
     "author": "Wikipedia",
     "license": "Wikipedia / Wikimedia Commons の各ファイルのライセンス",
     "sourceUrl": "https://ja.wikipedia.org/"
